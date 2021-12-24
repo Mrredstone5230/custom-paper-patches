@@ -4,7 +4,7 @@ Date: Fri, 5 Sept 2021 22:11:11 +0100
 Subject: Faster goat attacks
 
 diff --git a/src/main/java/net/minecraft/world/entity/animal/goat/GoatAi.java b/src/main/java/net/minecraft/world/entity/animal/goat/GoatAi.java
-index d0fc21ed8..a5d7103c9 100644
+index 1e8834e59..f6af6f660 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/goat/GoatAi.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/goat/GoatAi.java
 @@ -46,8 +46,8 @@ public class GoatAi {
@@ -15,6 +15,6 @@ index d0fc21ed8..a5d7103c9 100644
 -    private static final UniformInt TIME_BETWEEN_RAMS_SCREAMER = UniformInt.of(100, 300);
 +    private static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(60, 60);
 +    private static final UniformInt TIME_BETWEEN_RAMS_SCREAMER = UniformInt.of(30, 30);
-     private static final TargetingConditions RAM_TARGET_CONDITIONS = TargetingConditions.forCombat().selector((livingEntity) -> {
-         return !livingEntity.getType().equals(EntityType.GOAT) && livingEntity.level.getWorldBorder().isWithinBounds(livingEntity.getBoundingBox());
+     private static final TargetingConditions RAM_TARGET_CONDITIONS = TargetingConditions.forCombat().selector((entity) -> {
+         return !entity.getType().equals(EntityType.GOAT) && entity.level.getWorldBorder().isWithinBounds(entity.getBoundingBox());
      });
