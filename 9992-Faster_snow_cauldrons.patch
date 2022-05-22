@@ -4,28 +4,28 @@ Date: Fri, 9 Jul 2021 22:11:11 +0100
 Subject: Faster Snow Cauldrons
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index cebaf0fb8..2114a64a7 100644
+index 98209532a..a8b382a4b 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -867,7 +867,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -773,7 +773,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
          }
 
          gameprofilerfiller.popPush("iceandsnow");
--         if (!this.paperConfig.disableIceAndSnow && this.randomTickRandom.nextInt(16) == 0) { // Paper - Disable ice and snow // Paper - optimise random ticking
-+         if (!this.paperConfig.disableIceAndSnow) { // Paper - Disable ice and snow // Paper - optimise random ticking
+-        if (!this.paperConfig.disableIceAndSnow && this.random.nextInt(16) == 0) { // Paper - Disable ice and snow
++        if (!this.paperConfig.disableIceAndSnow) { // Paper - Disable ice and snow
              // Paper start - optimise chunk ticking
              this.getRandomBlockPosition(j, 0, k, 15, blockposition);
              int normalY = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, blockposition.getX() & 15, blockposition.getZ() & 15) + 1;
 diff --git a/src/main/java/net/minecraft/world/level/block/CauldronBlock.java b/src/main/java/net/minecraft/world/level/block/CauldronBlock.java
-index dbae4f3b5..d02a36eba 100644
+index 18f4c422e..af6b394ed 100644
 --- a/src/main/java/net/minecraft/world/level/block/CauldronBlock.java
 +++ b/src/main/java/net/minecraft/world/level/block/CauldronBlock.java
 @@ -29,7 +29,7 @@ public class CauldronBlock extends AbstractCauldronBlock {
      }
- 
+
      protected static boolean shouldHandlePrecipitation(Level world, Biome.Precipitation precipitation) {
 -        return precipitation == Biome.Precipitation.RAIN ? world.getRandom().nextFloat() < 0.05F : (precipitation == Biome.Precipitation.SNOW ? world.getRandom().nextFloat() < 0.1F : false);
 +        return precipitation == Biome.Precipitation.RAIN ? world.getRandom().nextFloat() < 0.05F : (precipitation == Biome.Precipitation.SNOW ? true: false);
      }
- 
+
      @Override
