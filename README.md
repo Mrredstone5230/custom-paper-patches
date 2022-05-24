@@ -1,6 +1,9 @@
 # custom-paper-patches
 This repo contains my custom patches for PaperMC
 
+### REPLACED BY https://github.com/Mrredstone5230/PoliPaper
+
+
 Custom Features
 ------
 * Faster turtle egg hatch time
